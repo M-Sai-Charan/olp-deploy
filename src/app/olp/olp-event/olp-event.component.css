@@ -1,18 +1,28 @@
+/* Base styles */
 .message-body {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background: #001122;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    place-items: center;
     font-family: "Poppins", sans-serif;
-    font-size: 5rem;
-    font-weight: 800;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
 .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    gap: 1rem;
     perspective: 1000px;
-    -webkit-perspective: 1000px;
+    flex-wrap: nowrap;
 }
+
 
 .loader>span {
     display: inline-block;
@@ -26,6 +36,7 @@
     color: #00ed64;
 }
 
+/* Animate spans with staggered delays */
 .loader>span:nth-child(2) {
     animation-delay: 0.2s;
 }
@@ -34,85 +45,38 @@
     animation-delay: 0.4s;
 }
 
-.loader>span:nth-child(4) {
-    animation-delay: 0.6s;
-}
-
-.loader>span:nth-child(5) {
-    animation-delay: 0.8s;
-}
-
-.loader>span:nth-child(6) {
-    animation-delay: 1s;
-}
-
-.loader>span:nth-child(7) {
-    animation-delay: 1.2s;
-}
-
-.loader>span:nth-child(8) {
-    animation-delay: 1.4s;
-}
-
-.loader>span:nth-child(9) {
-    animation-delay: 1.6s;
-}
-
-.loader>span:nth-child(10) {
-    animation-delay: 1.8s;
-}
-
-.loader>span:nth-child(11) {
-    animation-delay: 2s;
-}
-
-.loader>span:nth-child(12) {
-    animation-delay: 2.2s;
-}
-
-.loader>span:nth-child(13) {
-    animation-delay: 2.4s;
-}
-
-.loader>span:nth-child(14) {
-    animation-delay: 2.6s;
-}
-
 @keyframes anim {
-    35% {
-        transform: rotateX(360deg);
-    }
 
+    35%,
     100% {
         transform: rotateX(360deg);
     }
 }
 
-:root {
-    --primary-color: #c8dc71;
-    --gradient-color: linear-gradient(180deg, #d2ff00 0%, #00d2ff 100%);
-}
-
+/* Container for messages */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
+    margin-top: 2rem;
 }
 
-h1 {
+h1.type {
     color: #dbd56e;
     background: -webkit-linear-gradient(25deg, #eee, #333);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 3rem;
-    font-weight: 500;
+    font-size: 2rem;
+    font-weight: 600;
+    border-right: 2px solid;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid;
-    animation: type 1s steps(90) 1s 1 normal both, cursor 1s step-end infinite;
-    position: relative;
+    animation: type 2s steps(90) 1s 1 normal both, cursor 1s step-end infinite;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    color: #eee;
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
 }
 
 @keyframes type {
@@ -130,89 +94,37 @@ h1 {
         border-color: transparent;
     }
 }
+
+/* Social links */
 ul {
     display: flex;
-    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
     padding: 0;
-}
-li {
     list-style: none;
-    margin: 0 40px;
+    gap: 1rem;
 }
 
-li:nth-child(1) a {
-    background-color: #007bb5;
-}
-
-li:nth-child(1) a:before {
-    background-color: #006699;
-}
-
-li:nth-child(1) a:after {
-    background-color: #0088cc;
-}
-
-li:nth-child(2) a {
-    background-color: #1877f2;
-}
-
-li:nth-child(2) a:before {
-    background-color: #166fe5;
-}
-
-li:nth-child(2) a:after {
-    background-color: #3388ff;
-}
-
-li:nth-child(3) a {
-    background-color: #c32aa3;
-}
-
-li:nth-child(3) a:before {
-    background-color: #ad268f;
-}
-
-li:nth-child(3) a:after {
-    background-color: #d636b5;
-}
-
-li:nth-child(4) a {
-    background-color: #1da1f2;
-}
-
-li:nth-child(4) a:before {
-    background-color: #1a91da;
-}
-
-li:nth-child(4) a:after {
-    background-color: #33b2ff;
-}
-
-li:nth-child(5) a {
-    background-color: #ff0000;
-}
-
-li:nth-child(5) a:before {
-    background-color: #e60000;
-}
-
-li:nth-child(5) a:after {
-    background-color: #ff3333;
-}
-
-li:hover .fab {
-    color: #fff;
+li {
+    margin: 0;
 }
 
 a {
     position: relative;
     display: block;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     text-align: center;
-    box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
-    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(0, 0);
-    transition: 0.5s;
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+    transform: perspective(1000px) rotate(-15deg) skew(15deg);
+    transition: 0.4s;
+    border-radius: 8px;
+}
+
+a:hover {
+    transform: perspective(1000px) rotate(0deg) skew(0deg) translate(10px, -10px);
+    box-shadow: -30px 30px 30px rgba(0, 0, 0, 0.5);
 }
 
 a:before,
@@ -223,32 +135,105 @@ a:after {
 }
 
 a:before {
-    top: 10px;
-    left: -20px;
+    top: 5px;
+    left: -10px;
     height: 100%;
-    width: 20px;
-    transform: rotate(0deg) skewY(-45deg);
+    width: 10px;
+    transform: skewY(-45deg);
 }
 
 a:after {
-    bottom: -20px;
-    left: -10px;
-    height: 20px;
+    bottom: -10px;
+    left: -5px;
+    height: 10px;
     width: 100%;
-    transform: rotate(0deg) skewX(-45deg);
-}
-
-a:hover {
-    /* transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px); */
-    transform: perspective(1000px) rotate(0deg) skew(3deg) translate(20px, -20px);
-    box-shadow: -50px 50px 50px rgba(0, 0, 0, 0.5);
+    transform: skewX(-45deg);
 }
 
 .fab {
-    font-size: 40px;
+    font-size: 30px;
     color: #262626;
-    line-height: 80px;
+    line-height: 60px;
     transition: 0.5s;
-    position: relative;
-    bottom: 30px;
+}
+
+/* Icon Colors */
+li:nth-child(1) a {
+    background-color: #007bb5;
+}
+
+li:nth-child(2) a {
+    background-color: #1877f2;
+}
+
+li:nth-child(3) a {
+    background-color: #c32aa3;
+}
+
+li:nth-child(4) a {
+    background-color: #25D366;
+}
+
+li:nth-child(5) a {
+    background-color: #FF0000;
+}
+
+li:hover .fab {
+    color: #fff;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .loader {
+        font-size: 2rem;
+    }
+
+    h1.type {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    a {
+        width: 50px;
+        height: 50px;
+    }
+
+    .fab {
+        font-size: 24px;
+        line-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loader {
+        font-size: 1.8rem;
+    }
+
+    h1.type {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1rem;
+    }
+
+    a {
+        width: 45px;
+        height: 45px;
+    }
+
+    .fab {
+        font-size: 20px;
+        line-height: 45px;
+    }
+}
+
+@media (max-width: 600px) {
+    .loader {
+        font-size: 2rem;
+        gap: 0.5rem;
+    }
 }
