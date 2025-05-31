@@ -24,7 +24,7 @@ interface olpTimes {
 export class OlpFormComponent implements OnInit {
   contactForm: FormGroup;
   isMobile: boolean = true;
-
+  submitted = false;
   olpEvents: OLPEvents[] = [
     { value: 'w', viewValue: 'Wedding' },
     { value: 'r', viewValue: 'Reception' },
@@ -91,7 +91,14 @@ export class OlpFormComponent implements OnInit {
     // })
     // console.log(this.convertJson(this.contactForm.value));
     // setTimeout(() => {
-    this.router.navigateByUrl('/event')
+    const audio = new Audio('assets/sounds/click.wav');
+    audio.play();
+
+    // Wait for sound/flash, then show thank-you message
+    setTimeout(() => {
+      this.submitted = true;
+    }, 300); // 300ms delay matches flash animation
+    // this.router.navigateByUrl('/event')
     // }, 2000);
     // }
   }
