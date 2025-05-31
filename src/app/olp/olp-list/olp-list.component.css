@@ -1,0 +1,32 @@
+
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: linear-gradient(143deg in oklab, #101010, #ffffff00, #120101cf);
+    height: 100px;
+} */
+ body{
+    background: #001122;
+ }
+ .copy-rights{
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: appear 2s ease-in-out forwards;
+ }
+ @keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

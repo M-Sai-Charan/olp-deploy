@@ -1,0 +1,139 @@
+<div class="contact-container">
+    <div class="form-container">
+        <h1><img style="width: 60px;height: 60px;" src="../../../assets/images/olp-logo.png" alt="Logo">
+        </h1>
+        <p class="subtitle">Thank you for trusting us. Please provide us couple of details to understand your
+            requirements better.</p>
+        <form [formGroup]="contactForm" class="contact-form">
+            <div class="form-row">
+                <mat-form-field>
+                    <mat-label>Who is the Bride👸🏻</mat-label>
+                    <input matInput formControlName="firstName">
+                    <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+                        Bride Name is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Who is the Groom🤴🏻</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
+                        Groom Name is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Your contact number</mat-label>
+                    <input matInput formControlName="phone" type="tel">
+                    <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
+                        Phone Number is required
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
+                        Please enter a valid 10-digit phone number
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="email">
+                    <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field>
+                    <mat-label>What do you have in mind</mat-label>
+                    <textarea matInput formControlName="message" rows="4"></textarea>
+                    <mat-hint align="end">{{contactForm.get('message')?.value?.length || 0}}/500</mat-hint>
+                    <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
+                        Please enter a message
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="full-width">
+                <label style="margin-left: 10px;">Are you interested?*</label>
+                <br>
+                <div formGroupName="preShoot" style="margin-top: 10px;" >
+                    <mat-checkbox formControlName="yes">Haldi</mat-checkbox>
+                    <mat-checkbox formControlName="no">Nalugu</mat-checkbox>
+                    <mat-checkbox formControlName="no">Mehandi</mat-checkbox>
+                    <mat-checkbox formControlName="no">Sangeeth</mat-checkbox>
+                    <mat-checkbox formControlName="no">Reception</mat-checkbox>
+                    <mat-checkbox formControlName="no">Wedding</mat-checkbox>
+                </div>
+                <!-- <mat-radio-group formControlName="preShoot" aria-label="Select an option">
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                </mat-radio-group> -->
+            </div>
+            <div *ngIf="!isMobile" formArrayName="events" class="events-container">
+                <h2 style="font-size: 17px;">Please list down the events you want us to shoot</h2>
+                <ng-container *ngFor="let eventForm of events.controls; let i = index">
+                    <div [formGroupName]="i" class="event-form">
+                        <mat-form-field>
+                            <mat-label>Event Name</mat-label>
+                            <mat-select formControlName="eventName">
+                                @for (food of olpEvents; track food) {
+                                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-error *ngIf="eventForm.get('eventName')?.hasError('required')">
+                                Event Name is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Event Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="eventDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="eventForm.get('eventDate')?.hasError('required')">
+                                Event date is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Location</mat-label>
+                            <input matInput formControlName="eventLocation">
+                            <mat-error *ngIf="eventForm.get('eventLocation')?.hasError('required')">
+                                Event Location is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Time</mat-label>
+                            <mat-select formControlName="eventTime">
+                                @for (food of olpTimes; track food) {
+                                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-error *ngIf="eventForm.get('eventTime')?.hasError('required')">
+                                Event Time is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Number of Guests</mat-label>
+                            <input matInput formControlName="eventGuests">
+                            <mat-error *ngIf="eventForm.get('eventGuests')?.hasError('required')">
+                                Event No of Guests is required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button mat-mini-fab color="warn" type="button" (click)="removeEvent(i)" class="remove-event">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+                <button mat-raised-button color="primary" type="button" (click)="addEvent()" class="add-event">
+                    <mat-icon>add</mat-icon> Add Event
+                </button>
+            </div>
+            <div id="camera">
+                <div class="strip"></div>
+                <div class="lens"></div>
+                <div class="led" *ngIf="contactForm.valid && contactForm.get('events')?.value?.length >= 1"></div>
+                <div class="btn" (click)="onSubmit()"
+                    *ngIf="contactForm.valid && contactForm.get('events')?.value?.length >= 1"><span
+                        class="button-click">OLP</span></div>
+            </div>
+        </form>
+    </div>
+</div>

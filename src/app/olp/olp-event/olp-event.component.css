@@ -1,0 +1,254 @@
+.message-body {
+    width: 100%;
+    height: 100vh;
+    background: #001122;
+    text-align: center;
+    place-items: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+}
+
+.loader {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+.loader>span {
+    display: inline-block;
+    color: #fff;
+    transform-style: preserve-3d;
+    transform-origin: 0 100%;
+    animation: anim 3s infinite linear;
+}
+
+.loader>span:nth-child(even) {
+    color: #00ed64;
+}
+
+.loader>span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader>span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.loader>span:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.loader>span:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.loader>span:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.loader>span:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+.loader>span:nth-child(8) {
+    animation-delay: 1.4s;
+}
+
+.loader>span:nth-child(9) {
+    animation-delay: 1.6s;
+}
+
+.loader>span:nth-child(10) {
+    animation-delay: 1.8s;
+}
+
+.loader>span:nth-child(11) {
+    animation-delay: 2s;
+}
+
+.loader>span:nth-child(12) {
+    animation-delay: 2.2s;
+}
+
+.loader>span:nth-child(13) {
+    animation-delay: 2.4s;
+}
+
+.loader>span:nth-child(14) {
+    animation-delay: 2.6s;
+}
+
+@keyframes anim {
+    35% {
+        transform: rotateX(360deg);
+    }
+
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+:root {
+    --primary-color: #c8dc71;
+    --gradient-color: linear-gradient(180deg, #d2ff00 0%, #00d2ff 100%);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+h1 {
+    color: #dbd56e;
+    background: -webkit-linear-gradient(25deg, #eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    animation: type 1s steps(90) 1s 1 normal both, cursor 1s step-end infinite;
+    position: relative;
+}
+
+@keyframes type {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes cursor {
+    50% {
+        border-color: transparent;
+    }
+}
+ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+    margin: 0 40px;
+}
+
+li:nth-child(1) a {
+    background-color: #007bb5;
+}
+
+li:nth-child(1) a:before {
+    background-color: #006699;
+}
+
+li:nth-child(1) a:after {
+    background-color: #0088cc;
+}
+
+li:nth-child(2) a {
+    background-color: #1877f2;
+}
+
+li:nth-child(2) a:before {
+    background-color: #166fe5;
+}
+
+li:nth-child(2) a:after {
+    background-color: #3388ff;
+}
+
+li:nth-child(3) a {
+    background-color: #c32aa3;
+}
+
+li:nth-child(3) a:before {
+    background-color: #ad268f;
+}
+
+li:nth-child(3) a:after {
+    background-color: #d636b5;
+}
+
+li:nth-child(4) a {
+    background-color: #1da1f2;
+}
+
+li:nth-child(4) a:before {
+    background-color: #1a91da;
+}
+
+li:nth-child(4) a:after {
+    background-color: #33b2ff;
+}
+
+li:nth-child(5) a {
+    background-color: #ff0000;
+}
+
+li:nth-child(5) a:before {
+    background-color: #e60000;
+}
+
+li:nth-child(5) a:after {
+    background-color: #ff3333;
+}
+
+li:hover .fab {
+    color: #fff;
+}
+
+a {
+    position: relative;
+    display: block;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
+    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(0, 0);
+    transition: 0.5s;
+}
+
+a:before,
+a:after {
+    content: "";
+    position: absolute;
+    transition: 0.5s;
+}
+
+a:before {
+    top: 10px;
+    left: -20px;
+    height: 100%;
+    width: 20px;
+    transform: rotate(0deg) skewY(-45deg);
+}
+
+a:after {
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    transform: rotate(0deg) skewX(-45deg);
+}
+
+a:hover {
+    /* transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px); */
+    transform: perspective(1000px) rotate(0deg) skew(3deg) translate(20px, -20px);
+    box-shadow: -50px 50px 50px rgba(0, 0, 0, 0.5);
+}
+
+.fab {
+    font-size: 40px;
+    color: #262626;
+    line-height: 80px;
+    transition: 0.5s;
+    position: relative;
+    bottom: 30px;
+}

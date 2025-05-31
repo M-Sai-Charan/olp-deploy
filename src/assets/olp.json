@@ -1,0 +1,24 @@
+{
+  "Bride": "one",
+  "Groom": "two",
+  "Email": "sunny@gmail.com",
+  "ContactNumber": "6301587956",
+  "comments": "hello",
+  "Pre_Wedding": 1,
+  "events": [
+    {
+      "EventName": "w",
+      "Time": "w",
+      "Location": "banglore",
+      "No_Of_Guests": 100,
+      "Date": "2025-05-21"
+    },
+    {
+      "EventName": "w",
+      "Time": "w",
+      "Location": "chennai",
+      "No_Of_Guests": 200,
+      "Date": "2025-05-21"
+    }
+  ]
+}
