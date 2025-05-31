@@ -82,7 +82,7 @@
                     <div class="strip"></div>
                     <div class="lens"></div>
                     <div class="led" *ngIf="contactForm.valid"></div>
-                    <div class="btn" (click)="onSubmit()"><span class="button-click">OLP</span></div>
+                    <div class="btn" (click)="onSubmit()" *ngIf="contactForm.valid"><span class="button-click">OLP</span></div>
                 </div>
             </div>
         </form>
