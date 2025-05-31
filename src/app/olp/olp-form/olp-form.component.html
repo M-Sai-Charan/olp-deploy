@@ -1,6 +1,6 @@
 <div class="contact-container">
     <div class="form-container">
-        <h1><img style="width: 60px;height: 60px;" src="../../../assets/images/olp-logo.png" alt="Logo">
+        <h1><img style="width: 60px;height: 60px;" src="./assets/images/olp-logo.png" alt="Logo">
         </h1>
         <p class="subtitle">Thank you for trusting us. Please provide us couple of details to understand your
             requirements better.</p>
@@ -54,85 +54,24 @@
             <div class="full-width">
                 <label style="margin-left: 10px;">Are you interested?*</label>
                 <br>
-                <div formGroupName="preShoot" style="margin-top: 10px;" >
-                    <mat-checkbox formControlName="yes">Haldi</mat-checkbox>
-                    <mat-checkbox formControlName="no">Nalugu</mat-checkbox>
-                    <mat-checkbox formControlName="no">Mehandi</mat-checkbox>
-                    <mat-checkbox formControlName="no">Sangeeth</mat-checkbox>
-                    <mat-checkbox formControlName="no">Reception</mat-checkbox>
-                    <mat-checkbox formControlName="no">Wedding</mat-checkbox>
+                <div formGroupName="preShoot" style="margin-top: 10px;">
+                    <mat-checkbox formControlName="h">Haldi</mat-checkbox>
+                    <mat-checkbox formControlName="n">Nalugu</mat-checkbox>
+                    <mat-checkbox formControlName="m">Mehandi</mat-checkbox>
+                    <mat-checkbox formControlName="s">Sangeeth</mat-checkbox>
+                    <mat-checkbox formControlName="r">Reception</mat-checkbox>
+                    <mat-checkbox formControlName="w">Wedding</mat-checkbox>
                 </div>
-                <!-- <mat-radio-group formControlName="preShoot" aria-label="Select an option">
-                    <mat-radio-button value="1">Yes</mat-radio-button>
-                    <mat-radio-button value="2">No</mat-radio-button>
-                </mat-radio-group> -->
             </div>
-            <div *ngIf="!isMobile" formArrayName="events" class="events-container">
-                <h2 style="font-size: 17px;">Please list down the events you want us to shoot</h2>
-                <ng-container *ngFor="let eventForm of events.controls; let i = index">
-                    <div [formGroupName]="i" class="event-form">
-                        <mat-form-field>
-                            <mat-label>Event Name</mat-label>
-                            <mat-select formControlName="eventName">
-                                @for (food of olpEvents; track food) {
-                                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                                }
-                            </mat-select>
-                            <mat-error *ngIf="eventForm.get('eventName')?.hasError('required')">
-                                Event Name is required
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Event Date</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="eventDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="eventForm.get('eventDate')?.hasError('required')">
-                                Event date is required
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Location</mat-label>
-                            <input matInput formControlName="eventLocation">
-                            <mat-error *ngIf="eventForm.get('eventLocation')?.hasError('required')">
-                                Event Location is required
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Time</mat-label>
-                            <mat-select formControlName="eventTime">
-                                @for (food of olpTimes; track food) {
-                                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                                }
-                            </mat-select>
-                            <mat-error *ngIf="eventForm.get('eventTime')?.hasError('required')">
-                                Event Time is required
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Number of Guests</mat-label>
-                            <input matInput formControlName="eventGuests">
-                            <mat-error *ngIf="eventForm.get('eventGuests')?.hasError('required')">
-                                Event No of Guests is required
-                            </mat-error>
-                        </mat-form-field>
-
-                        <button mat-mini-fab color="warn" type="button" (click)="removeEvent(i)" class="remove-event">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+            <div class="camera-wrapper">
+                <div id="camera">
+                    <div class="strip"></div>
+                    <div class="lens"></div>
+                    <div class="led" *ngIf="contactForm.valid"></div>
+                    <div class="btn" (click)="onSubmit()" *ngIf="contactForm.valid"><span
+                            class="button-click">OLP</span>
                     </div>
-                </ng-container>
-                <button mat-raised-button color="primary" type="button" (click)="addEvent()" class="add-event">
-                    <mat-icon>add</mat-icon> Add Event
-                </button>
-            </div>
-            <div id="camera">
-                <div class="strip"></div>
-                <div class="lens"></div>
-                <div class="led" *ngIf="contactForm.valid && contactForm.get('events')?.value?.length >= 1"></div>
-                <div class="btn" (click)="onSubmit()"
-                    *ngIf="contactForm.valid && contactForm.get('events')?.value?.length >= 1"><span
-                        class="button-click">OLP</span></div>
+                </div>
             </div>
         </form>
     </div>

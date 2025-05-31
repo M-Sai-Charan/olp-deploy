@@ -43,10 +43,14 @@ export class OlpFormComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       message: ['', [Validators.required]],
       preShoot: this.fb.group({
-    yes: [false],
-    no: [false]
-  }),
-      events: this.fb.array([])
+        h: [false],
+        n: [false],
+        m: [false],
+        s: [false],
+        r: [false],
+        w: [false]
+      }),
+      // events: this.fb.array([])
     });
     this.checkScreenSize();
   }
@@ -82,13 +86,13 @@ export class OlpFormComponent implements OnInit {
 
   onSubmit() {
     // if (this.contactForm.valid) {
-      // this.olpService.postOLP('https://jsonplaceholder.typicode.com/posts', this.contactForm.value).subscribe((data: any) => {
-      //   console.log(data)
-      // })
-      // console.log(this.convertJson(this.contactForm.value));
-      // setTimeout(() => {
-        this.router.navigateByUrl('/event')
-      // }, 2000);
+    // this.olpService.postOLP('https://jsonplaceholder.typicode.com/posts', this.contactForm.value).subscribe((data: any) => {
+    //   console.log(data)
+    // })
+    // console.log(this.convertJson(this.contactForm.value));
+    // setTimeout(() => {
+    this.router.navigateByUrl('/event')
+    // }, 2000);
     // }
   }
   formatToYYYYMMDD(isoDate: any) {
