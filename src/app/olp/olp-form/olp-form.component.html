@@ -1,4 +1,3 @@
-<!-- Contact Form Section -->
 <div class="contact-container" [ngClass]="{ 'after-submit': submitted }">
     <div class="form-container" [ngClass]="{ 'submitted': submitted }">
         <h1>
@@ -9,7 +8,6 @@
         </p>
 
         <form [formGroup]="contactForm" class="contact-form">
-            <!-- Bride & Groom -->
             <div class="form-row">
                 <mat-form-field>
                     <mat-label>Who is the Bride👸🏻</mat-label>
@@ -49,8 +47,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
-            <!-- Message -->
             <div class="form-row">
                 <mat-form-field>
                     <mat-label>What do you have in mind</mat-label>
@@ -61,8 +57,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
-            <!-- Checkbox Group -->
             <div class="full-width">
                 <label style="margin-left: 10px;">Are you interested?*</label>
                 <br />
@@ -75,24 +69,17 @@
                     <mat-checkbox formControlName="w">Wedding</mat-checkbox>
                 </div>
             </div>
-
-            <!-- Camera Button -->
-            <div class="camera-wrapper">
-                <div id="camera">
+            <div class="camera-wrapper" *ngIf="contactForm.valid">
+                <div id="camera" (click)="onSubmit()">
                     <div class="strip"></div>
                     <div class="lens"></div>
-                    <div class="led" *ngIf="contactForm.valid"></div>
-                    <div class="btn" (click)="onSubmit()" *ngIf="contactForm.valid"><span class="button-click">OLP</span></div>
+                    <div class="led"></div>
+                    <div class="btn"><span class="button-click">OLP</span></div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-<!-- Flash Overlay -->
-<!-- <div class="flash-overlay" *ngIf="submitted && showFlash"></div> -->
-
-<!-- Thank You Message -->
 <div class="camera-flash" *ngIf="submitted">
     <div class="message-body">
         <div class="loader">

@@ -154,6 +154,7 @@ body {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 #panel {

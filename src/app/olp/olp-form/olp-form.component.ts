@@ -50,7 +50,6 @@ export class OlpFormComponent implements OnInit {
         r: [false],
         w: [false]
       }),
-      // events: this.fb.array([])
     });
     this.checkScreenSize();
   }
