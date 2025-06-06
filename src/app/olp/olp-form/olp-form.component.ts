@@ -12,7 +12,7 @@ interface olpTimes {
   value: string;
   viewValue: string;
 }
-
+// json-server --watch olp.json --port 3000
 @Component({
   selector: 'app-olp-form',
   standalone: false,
@@ -70,22 +70,15 @@ export class OlpFormComponent implements OnInit {
     this.events.push(eventForm);
   }
   onSubmit() {
-    // if (this.contactForm.valid) {
-    // this.olpService.postOLP('https://jsonplaceholder.typicode.com/posts', this.contactForm.value).subscribe((data: any) => {
-    //   console.log(data)
-    // })
-    console.log(this.convertJson(this.contactForm.value));
-    // setTimeout(() => {
-    const audio = new Audio('assets/sounds/click.wav');
-    audio.play();
-
-    // Wait for sound/flash, then show thank-you message
-    setTimeout(() => {
-      this.submitted = true;
-    }, 300); // 300ms delay matches flash animation
-    // this.router.navigateByUrl('/event')
-    // }, 2000);
-    // }
+    if (this.contactForm.valid) {
+      this.olpService.postOLP('http://localhost:3000/eventForms', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
+        setTimeout(() => {
+          const audio = new Audio('assets/sounds/click.wav');
+          audio.play();
+          this.submitted = true;
+        }, 300);
+      })
+    }
   }
   formatToYYYYMMDD(isoDate: any) {
     const date = new Date(isoDate);
@@ -102,7 +95,8 @@ export class OlpFormComponent implements OnInit {
       "ContactNumber": data.phone,
       "comments": data.message,
       "Pre_Wedding": data.preShoot,
-      "location": data.location
+      "location": data.location,
+      "source":data.source
     };
   }
 }
