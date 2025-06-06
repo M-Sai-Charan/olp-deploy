@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OlpService } from '../olp-services/olp.service';
 
@@ -13,6 +13,7 @@ interface olpTimes {
   viewValue: string;
 }
 // json-server --watch olp.json --port 3000
+// https://6842ebd8e1347494c31e748c.mockapi.io/olp/users
 @Component({
   selector: 'app-olp-form',
   standalone: false,
@@ -33,7 +34,19 @@ export class OlpFormComponent implements OnInit {
     { value: 'r', viewValue: 'Morning' },
     { value: 'h', viewValue: 'Afernoon' },
   ];
+  olpEventsLists = [
+    { id: 1, name: 'Haldi', value: 'haldi' },
+    { id: 2, name: 'Nalugu', value: 'nalugu' },
+    { id: 3, name: 'Mehandi', value: 'mehandi' },
+    { id: 4, name: 'Sangeeth', value: 'sangeeth' },
+    { id: 5, name: 'Reception', value: 'reception' },
+    { id: 6, name: 'Marriage', value: 'marraige' },
+  ]
   constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router) {
+    const preShootGroup: { [key: string]: FormControl } = {};
+    this.olpEventsLists.forEach(event => {
+      preShootGroup[event.value.toLowerCase()] = new FormControl(false);
+    });
     this.contactForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -41,14 +54,7 @@ export class OlpFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       message: ['', [Validators.required]],
-      preShoot: this.fb.group({
-        haldi: [false],
-        nalugu: [false],
-        mehandi: [false],
-        sangeeth: [false],
-        reception: [false],
-        wedding: [false]
-      }),
+      preShoot: this.fb.group(preShootGroup),
       source: ['', Validators.required]
     });
   }
@@ -71,12 +77,14 @@ export class OlpFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.contactForm.valid) {
-      this.olpService.postOLP('http://localhost:3000/eventForms', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
-        setTimeout(() => {
-          const audio = new Audio('assets/sounds/click.wav');
-          audio.play();
-          this.submitted = true;
-        }, 300);
+      this.olpService.postOLP('https://6842ebd8e1347494c31e748c.mockapi.io/olp/users', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
+        if (data) {
+          setTimeout(() => {
+            const audio = new Audio('assets/sounds/click.wav');
+            audio.play();
+            this.submitted = true;
+          }, 300);
+        }
       })
     }
   }
@@ -88,15 +96,21 @@ export class OlpFormComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
   convertJson(data: any) {
+    const preWeddingSelected = this.olpEventsLists
+      .filter(event => data.preShoot[event.value.toLowerCase()])
+      .map(event => ({
+        ...event,
+      }));
     return {
       "Bride": data.firstName,
       "Groom": data.lastName,
       "Email": data.email,
       "ContactNumber": data.phone,
       "comments": data.message,
-      "Pre_Wedding": data.preShoot,
+      "Pre_Wedding": preWeddingSelected,
       "location": data.location,
-      "source":data.source
+      "source": data.source,
+      "timestamp": new Date().toISOString(),
     };
   }
 }

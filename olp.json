@@ -51,6 +51,24 @@
       },
       "location": "dharmavaram",
       "source": "Others"
+    },
+    {
+      "id": "e180",
+      "Bride": "test",
+      "Groom": "tesing",
+      "Email": "ms@gm.com",
+      "ContactNumber": "6301587956",
+      "comments": "fdj",
+      "Pre_Wedding": {
+        "haldi": true,
+        "nalugu": true,
+        "mehandi": true,
+        "sangeeth": false,
+        "reception": false,
+        "wedding": false
+      },
+      "location": "bha",
+      "source": "Instagram"
     }
   ]
 }

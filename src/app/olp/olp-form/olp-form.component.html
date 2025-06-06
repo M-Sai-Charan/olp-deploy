@@ -47,7 +47,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                 <mat-form-field>
+                <mat-form-field>
                     <mat-label>Venue / Location</mat-label>
                     <input matInput formControlName="location" />
                     <mat-error *ngIf="contactForm.get('location')?.hasError('required')">
@@ -66,27 +66,25 @@
                 </mat-form-field>
             </div>
             <div class="form-row">
-            <div class="full-width">
-                <label style="margin-left: 10px;">Are you interested?*</label>
-                <div formGroupName="preShoot" style="margin-top: 10px;">
-                    <mat-checkbox formControlName="haldi">Haldi</mat-checkbox>
-                    <mat-checkbox formControlName="nalugu">Nalugu</mat-checkbox>
-                    <mat-checkbox formControlName="mehandi">Mehandi</mat-checkbox>
-                    <mat-checkbox formControlName="sangeeth">Sangeeth</mat-checkbox>
-                    <mat-checkbox formControlName="reception">Reception</mat-checkbox>
-                    <mat-checkbox formControlName="wedding">Wedding</mat-checkbox>
+                <div class="full-width">
+                    <label style="margin-left: 10px;">Are you interested?*</label>
+                    <div formGroupName="preShoot" style="margin-top: 10px;" class="checkbox-group">
+                        <mat-checkbox *ngFor="let event of olpEventsLists"
+                            [formControlName]="event.value.toLowerCase()">
+                            {{ event.name }}
+                        </mat-checkbox>
+                    </div>
                 </div>
-            </div>
-            <div class="full-width">
-                <label style="margin-left: 10px;">How did you know about us?*</label>
-                <div style="margin-top: 10px;">
-                    <mat-radio-group formControlName="source">
-                        <mat-radio-button value="Instagram">Instagram</mat-radio-button>
-                        <mat-radio-button value="Facebook">Facebook</mat-radio-button>
-                        <mat-radio-button value="Others">Others</mat-radio-button>
-                    </mat-radio-group>
+                <div class="full-width">
+                    <label style="margin-left: 10px;">How did you know about us?*</label>
+                    <div style="margin-top: 10px;">
+                        <mat-radio-group formControlName="source">
+                            <mat-radio-button value="Instagram">Instagram</mat-radio-button>
+                            <mat-radio-button value="Facebook">Facebook</mat-radio-button>
+                            <mat-radio-button value="Others">Others</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="camera-wrapper" *ngIf="contactForm.valid">
                 <div id="camera" (click)="onSubmit()">
