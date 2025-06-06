@@ -77,7 +77,7 @@ export class OlpFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.contactForm.valid) {
-      this.olpService.postOLP('https://6842ebd8e1347494c31e748c.mockapi.io/olp/users', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
+      this.olpService.postOLP('http://localhost:5246/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
         if (data) {
           setTimeout(() => {
             const audio = new Audio('assets/sounds/click.wav');
