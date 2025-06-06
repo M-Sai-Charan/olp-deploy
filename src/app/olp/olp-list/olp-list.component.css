@@ -1,13 +1,9 @@
 
-/* *{
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
-    background: linear-gradient(143deg in oklab, #101010, #ffffff00, #120101cf);
-    height: 100px;
-} */
  body{
     background: #001122;
  }

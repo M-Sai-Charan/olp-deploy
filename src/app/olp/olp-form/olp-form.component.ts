@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Platform } from '@angular/cdk/platform';
 import { OlpService } from '../olp-services/olp.service';
 
 interface OLPEvents {
@@ -23,7 +22,6 @@ interface olpTimes {
 })
 export class OlpFormComponent implements OnInit {
   contactForm: FormGroup;
-  isMobile: boolean = true;
   submitted = false;
   olpEvents: OLPEvents[] = [
     { value: 'w', viewValue: 'Wedding' },
@@ -35,34 +33,27 @@ export class OlpFormComponent implements OnInit {
     { value: 'r', viewValue: 'Morning' },
     { value: 'h', viewValue: 'Afernoon' },
   ];
-  constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router, private platform: Platform) {
+  constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router) {
     this.contactForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
+      location: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       message: ['', [Validators.required]],
       preShoot: this.fb.group({
-        h: [false],
-        n: [false],
-        m: [false],
-        s: [false],
-        r: [false],
-        w: [false]
+        haldi: [false],
+        nalugu: [false],
+        mehandi: [false],
+        sangeeth: [false],
+        reception: [false],
+        wedding: [false]
       }),
+      source: ['', Validators.required]
     });
-    this.checkScreenSize();
   }
 
   ngOnInit(): void {
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.checkScreenSize();
-  }
-
-  checkScreenSize() {
-    this.isMobile = this.platform.ANDROID || this.platform.IOS || window.innerWidth < 768;
   }
   get events() {
     return this.contactForm.get('events') as FormArray;
@@ -78,17 +69,12 @@ export class OlpFormComponent implements OnInit {
     });
     this.events.push(eventForm);
   }
-
-  removeEvent(index: number) {
-    this.events.removeAt(index);
-  }
-
   onSubmit() {
     // if (this.contactForm.valid) {
     // this.olpService.postOLP('https://jsonplaceholder.typicode.com/posts', this.contactForm.value).subscribe((data: any) => {
     //   console.log(data)
     // })
-    // console.log(this.convertJson(this.contactForm.value));
+    console.log(this.convertJson(this.contactForm.value));
     // setTimeout(() => {
     const audio = new Audio('assets/sounds/click.wav');
     audio.play();
@@ -115,14 +101,8 @@ export class OlpFormComponent implements OnInit {
       "Email": data.email,
       "ContactNumber": data.phone,
       "comments": data.message,
-      "Pre_Wedding": Number(data.preShoot),
-      "events": data.events.map((event: any) => ({
-        "EventName": event.eventName,
-        "Time": event.eventTime,
-        "Location": event.eventLocation,
-        "No_Of_Guests": Number(event.eventGuests),
-        "Date": this.formatToYYYYMMDD(event.eventDate)
-      }))
+      "Pre_Wedding": data.preShoot,
+      "location": data.location
     };
   }
 }
