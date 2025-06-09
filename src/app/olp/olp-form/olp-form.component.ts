@@ -42,7 +42,7 @@ export class OlpFormComponent implements OnInit {
     { id: 3, name: 'Mehandi', value: 'mehandi' },
     { id: 4, name: 'Sangeeth', value: 'sangeeth' },
     { id: 5, name: 'Reception', value: 'reception' },
-    { id: 6, name: 'Marriage', value: 'marraige' },
+    { id: 6, name: 'Wedding', value: 'wedding' },
   ]
   constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router) {
     const preShootGroup: { [key: string]: FormControl } = {};
