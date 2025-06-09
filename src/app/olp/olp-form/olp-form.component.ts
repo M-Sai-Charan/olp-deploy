@@ -100,19 +100,30 @@ export class OlpFormComponent implements OnInit {
   convertJson(data: any) {
     const preWeddingSelected = this.olpEventsLists
       .filter(event => data.preShoot[event.value.toLowerCase()])
-      .map(event => ({
-        ...event,
-      }));
+      .map(event => (
+        {
+          eventName: event,
+          eventDate: '',
+          eventLocation: '',
+          eventTime: '',
+          eventGuests: '',
+          eventBudget: '',
+        }
+      ));
     return {
+      "olpId": '',
       "Bride": data.firstName,
       "Groom": data.lastName,
-      "Email": data.email,
       "ContactNumber": data.phone,
-      "comments": data.message,
-      "Pre_Wedding": preWeddingSelected,
+      "Email": data.email,
       "location": data.location,
+      "comments": data.message,
       "source": data.source,
-      "timestamp": new Date().toISOString(),
+      "createdOn": new Date().toISOString(),
+      "calledBy": '',
+      "callDate": '',
+      "callStatus": '',
+      "events": preWeddingSelected,
     };
   }
 }
