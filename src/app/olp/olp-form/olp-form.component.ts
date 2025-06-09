@@ -79,7 +79,7 @@ export class OlpFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.contactForm.valid) {
-      this.olpService.postOLP('http://olp-deploy.azurewebsites.net/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
+      this.olpService.postOLP('https://olp-deploy.azurewebsites.net/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
         if (data) {
           setTimeout(() => {
             const audio = new Audio('assets/sounds/click.wav');
