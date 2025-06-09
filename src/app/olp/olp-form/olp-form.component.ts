@@ -15,6 +15,7 @@ interface olpTimes {
 // json-server --watch olp.json --port 3000
 // https://6842ebd8e1347494c31e748c.mockapi.io/olp/users
 // https://2d81-2409-40f0-2033-7669-5824-9d94-56c4-96a6.ngrok-free.app/api/WeddingEvents
+// http://localhost:5246/api/WeddingEvents
 @Component({
   selector: 'app-olp-form',
   standalone: false,
@@ -78,7 +79,7 @@ export class OlpFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.contactForm.valid) {
-      this.olpService.postOLP('http://localhost:5246/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
+      this.olpService.postOLP('http://olp-deploy.azurewebsites.net/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
         if (data) {
           setTimeout(() => {
             const audio = new Audio('assets/sounds/click.wav');
