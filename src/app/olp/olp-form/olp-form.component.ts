@@ -119,7 +119,6 @@ export class OlpFormComponent implements OnInit {
       "location": data.location,
       "comments": data.message,
       "source": data.source,
-      "createdOn": new Date().toISOString(),
       "calledBy": '',
       "callDate": '',
       "callStatus": '',
