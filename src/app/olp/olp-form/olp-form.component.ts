@@ -105,7 +105,7 @@ export class OlpFormComponent implements OnInit {
           eventName: event,
           eventDate: '',
           eventLocation: '',
-          eventTime: '',
+          eventTime: { id: 0, name: '', value: '' },
           eventGuests: '',
           eventBudget: '',
         }
@@ -119,9 +119,9 @@ export class OlpFormComponent implements OnInit {
       "location": data.location,
       "comments": data.message,
       "source": data.source,
-      "calledBy": '',
+      "calledBy": { id: 0, name: '', value: '' },
       "callDate": '',
-      "callStatus": '',
+      "callStatus": { name: '', value: '' },
       "events": preWeddingSelected,
     };
   }
