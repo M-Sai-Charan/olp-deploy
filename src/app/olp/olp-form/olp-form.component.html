@@ -77,14 +77,16 @@
                 </div>
                 <div class="full-width">
                     <label style="margin-left: 10px;">How did you know about us?*</label>
-                    <div style="margin-top: 10px;">
-                        <mat-radio-group formControlName="source">
+                    <div class="radio-group-wrapper">
+                        <mat-radio-group formControlName="source" class="responsive-radio-group">
                             <mat-radio-button value="Instagram">Instagram</mat-radio-button>
                             <mat-radio-button value="Facebook">Facebook</mat-radio-button>
                             <mat-radio-button value="Others">Others</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
+
+
             </div>
             <div class="camera-wrapper" *ngIf="contactForm.valid">
                 <div id="camera" (click)="onSubmit()">

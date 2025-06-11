@@ -124,6 +124,27 @@ h1 {
   background-color: white !important;
 }
 
+.radio-group-wrapper {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.responsive-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .responsive-radio-group {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+    margin-left: -25px;
+  }
+}
+
+
 /* @import url(https://fonts.googleapis.com/css?family=News+Cycle:400); */
 
 body {
