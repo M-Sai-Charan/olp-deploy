@@ -10,21 +10,15 @@
         <form [formGroup]="contactForm" class="contact-form">
             <div class="form-row">
                 <mat-form-field>
-                    <mat-label>Who is the Bride👸🏻</mat-label>
+                    <mat-label>Bride👸🏻 & Groom🤴🏻 </mat-label>
                     <input matInput formControlName="firstName" />
                     <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
-                        Bride Name is required
+                        Bride & Groom Name is required
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('firstName')?.hasError('invalidFormat')">
+                        Please enter in the format: Bride & Groom
                     </mat-error>
                 </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Who is the Groom🤴🏻</mat-label>
-                    <input matInput formControlName="lastName" />
-                    <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
-                        Groom Name is required
-                    </mat-error>
-                </mat-form-field>
-
                 <mat-form-field>
                     <mat-label>Your contact number</mat-label>
                     <input matInput formControlName="phone" type="tel" />

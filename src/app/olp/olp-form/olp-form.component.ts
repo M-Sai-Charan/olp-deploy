@@ -50,8 +50,8 @@ export class OlpFormComponent implements OnInit {
       preShootGroup[event.value.toLowerCase()] = new FormControl(false);
     });
     this.contactForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, this.brideGroomValidator]],
+      lastName: [''],
       location: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
@@ -59,6 +59,14 @@ export class OlpFormComponent implements OnInit {
       preShoot: this.fb.group(preShootGroup),
       source: ['', Validators.required]
     });
+  }
+  brideGroomValidator(control: FormControl) {
+    const value = control.value || '';
+    const parts = value.split('&').map((part: any) => part.trim());
+    if (parts.length !== 2 || parts[0] === '' || parts[1] === '') {
+      return { invalidFormat: true };
+    }
+    return null;
   }
 
   ngOnInit(): void {
@@ -98,6 +106,9 @@ export class OlpFormComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
   convertJson(data: any) {
+    const names = data.firstName.split('&').map((n: string) => n.trim());
+    const bride = names[0] || '';
+    const groom = names[1] || '';
     const preWeddingSelected = this.olpEventsLists
       .filter(event => data.preShoot[event.value.toLowerCase()])
       .map(event => (
@@ -112,8 +123,8 @@ export class OlpFormComponent implements OnInit {
       ));
     return {
       "olpId": '',
-      "Bride": data.firstName,
-      "Groom": data.lastName,
+      "Bride": bride,
+      "Groom": groom,
       "ContactNumber": data.phone,
       "Email": data.email,
       "location": data.location,
