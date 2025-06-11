@@ -132,7 +132,10 @@ export class OlpFormComponent implements OnInit {
       "source": data.source,
       "calledBy": { id: 0, name: '', value: '' },
       "callDate": '',
-      "callStatus": { name: '', value: '' },
+      "callStatus": {
+        "name": "New",
+        "value": "New"
+      },
       "events": preWeddingSelected,
     };
   }
