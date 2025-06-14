@@ -62,13 +62,15 @@
             <div class="form-row">
                 <div class="full-width">
                     <label style="margin-left: 10px;">Are you interested?*</label>
-                    <div formGroupName="preShoot" style="margin-top: 10px;" class="checkbox-group">
-                        <mat-checkbox *ngFor="let event of olpEventsLists"
-                            [formControlName]="event.value.toLowerCase()">
-                            {{ event.name }}
-                        </mat-checkbox>
+                    <div formGroupName="preShoot" class="checkbox-group" style="margin-top: 10px;">
+                        <ng-container *ngFor="let event of olpEventsLists">
+                            <mat-checkbox *ngIf="event?.value" [formControlName]="event.value">
+                                {{ event.EventName }}
+                            </mat-checkbox>
+                        </ng-container>
                     </div>
                 </div>
+
                 <div class="full-width">
                     <label style="margin-left: 10px;">How did you know about us?*</label>
                     <div class="radio-group-wrapper">
