@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OlpService } from '../olp-services/olp.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-olp-form',
   standalone: false,
@@ -41,18 +42,16 @@ export class OlpFormComponent implements OnInit {
     return this.contactForm.get('events') as FormArray;
   }
   getOLPMasterData() {
-    this.olpService.getOLP('http://192.168.0.111:8080/api/olp/getmasterdata')
+    this.olpService.getOLP('https://localhost:7167/api/OLP/GetMasterData')
       .subscribe((data: any) => {
         if (data && Array.isArray(data.EventMaster)) {
           this.olpEventsLists = data.EventMaster
             .filter((event: any) => !!event.EventName)
             .map((event: any) => ({
               EventName: event.EventName,
-              EventID:event.EventID,
+              EventID: event.EventID,
               value: event.EventName.toLowerCase().replace(/\s+/g, '_')
             }));
-
-          // Build the FormGroup for preShoot
           const preShootGroup: { [key: string]: FormControl } = {};
           this.olpEventsLists.forEach((event: any) => {
             preShootGroup[event.value] = new FormControl(false);
@@ -63,19 +62,25 @@ export class OlpFormComponent implements OnInit {
       });
   }
   onSubmit() {
-    console.log(this.convertJson(this.contactForm.value))
-    // if (this.contactForm.valid) {
-    //   this.olpService.postOLP('https://olp-deploy.azurewebsites.net/api/WeddingEvents', this.convertJson(this.contactForm.value)).subscribe((data: any) => {
-    //     if (data) {
-    //       setTimeout(() => {
-    //         const audio = new Audio('assets/sounds/click.wav');
-    //         audio.play();
-    //         this.submitted = true;
-    //       }, 300);
-    //     }
-    //   })
-    // }
+    if (this.contactForm.valid) {
+      const jsonObj = this.convertJson(this.contactForm.value);
+      const jsonStr = encodeURIComponent(JSON.stringify(jsonObj));  // Safely encode the JSON
+
+      const url = `https://localhost:7167/api/OLP/SetEnquiryDetails?value=${jsonStr}`;
+
+      this.olpService.postOLP(url, {}).subscribe((data: any) => {
+        if (data) {
+          setTimeout(() => {
+            const audio = new Audio('assets/sounds/click.wav');
+            audio.play();
+            this.submitted = true;
+          }, 300);
+        }
+      });
+    }
   }
+
+
   convertJson(data: any) {
     const names = data.firstName.split('&').map((n: string) => n.trim());
     const bride = names[0] || '';
@@ -84,11 +89,11 @@ export class OlpFormComponent implements OnInit {
       .filter((event: any) => data.preShoot[event.value.toLowerCase()])
       .map((event: any) => (
         {
-          eventName: event,
-          eventDate: '',
-          eventLocation: '',
-          eventTime: '',
-          eventGuests: '',
+          EventName: event?.EventName,
+          EventDate: '',
+          EventLocation: '',
+          EventTime: '',
+          EventGuests: '',
         }
       ));
     return {
@@ -96,10 +101,17 @@ export class OlpFormComponent implements OnInit {
       "Groom": groom,
       "ContactNumber": data.phone,
       "Email": data.email,
-      "location": data.location,
-      "comments": data.message,
-      "source": data.source,
-      "events": preWeddingSelected,
+      "Location": data.location,
+      "Comments": data.message,
+      "Source": data.source,
+      "Events": preWeddingSelected,
     };
   }
+  formatDateToYMD(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 }
