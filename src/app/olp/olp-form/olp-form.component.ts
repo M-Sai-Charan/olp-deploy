@@ -42,7 +42,7 @@ export class OlpFormComponent implements OnInit {
     return this.contactForm.get('events') as FormArray;
   }
   getOLPMasterData() {
-    this.olpService.getOLP('https://localhost:7167/api/OLP/GetMasterData')
+    this.olpService.getOLP('https://onelookphotography.azurewebsites.net/api/olp/getmasterdata')
       .subscribe((data: any) => {
         if (data && Array.isArray(data.EventMaster)) {
           this.olpEventsLists = data.EventMaster
@@ -66,7 +66,7 @@ export class OlpFormComponent implements OnInit {
       const jsonObj = this.convertJson(this.contactForm.value);
       const jsonStr = encodeURIComponent(JSON.stringify(jsonObj));  // Safely encode the JSON
 
-      const url = `https://localhost:7167/api/OLP/SetEnquiryDetails?value=${jsonStr}`;
+      const url = `https://onelookphotography.azurewebsites.net/api/OLP/SetEnquiryDetails?value=${jsonStr}`;
 
       this.olpService.postOLP(url, {}).subscribe((data: any) => {
         if (data) {
