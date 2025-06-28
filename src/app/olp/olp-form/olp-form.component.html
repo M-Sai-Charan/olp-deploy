@@ -1,91 +1,99 @@
 <div class="contact-container" [ngClass]="{ 'after-submit': submitted }">
     <div class="form-container" [ngClass]="{ 'submitted': submitted }">
+        <div class="lang-switch-top-right">
+            <mat-slide-toggle color="primary" [checked]="selectedLang === 'te'"
+                (change)="switchLang($event.checked ? 'te' : 'en')">
+                <!-- {{ selectedLang === 'te' ? 'తెలుగు' : 'English' }} -->
+            </mat-slide-toggle>
+        </div>
         <h1>
             <img style="width: 60px;height: 60px;" src="./assets/images/olp-logo.png" alt="Logo" />
         </h1>
-        <p class="subtitle">
-            Thank you for trusting us. Please provide us a couple of details to understand your requirements better.
-        </p>
+        <p class="subtitle">{{ 'CONTACT_FORM.SUBTITLE' | translate }}</p>
 
         <form [formGroup]="contactForm" class="contact-form">
             <div class="form-row">
                 <mat-form-field>
-                    <mat-label>Bride👸🏻 & Groom🤴🏻 </mat-label>
+                    <mat-label>{{ 'CONTACT_FORM.BRIDE_GROOM' | translate }}</mat-label>
                     <input matInput formControlName="firstName" />
                     <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
-                        Bride & Groom Name is required
+                        {{ 'CONTACT_FORM.ERROR.BRIDE_GROOM_REQUIRED' | translate }}
                     </mat-error>
                     <mat-error
-                        *ngIf=" !contactForm.get('firstName')?.hasError('required') && contactForm.get('firstName')?.hasError('invalidFormat')">
-                        Please enter in the format: Bride Name & Groom Name
+                        *ngIf="contactForm.get('firstName')?.hasError('invalidFormat') && !contactForm.get('firstName')?.hasError('required')">
+                        {{ 'CONTACT_FORM.ERROR.BRIDE_GROOM_FORMAT' | translate }}
                     </mat-error>
                 </mat-form-field>
+
                 <mat-form-field>
-                    <mat-label>Your contact number</mat-label>
+                    <mat-label>{{ 'CONTACT_FORM.PHONE' | translate }}</mat-label>
                     <input matInput formControlName="phone" type="tel" />
                     <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
-                        Phone Number is required
+                        {{ 'CONTACT_FORM.ERROR.PHONE_REQUIRED' | translate }}
                     </mat-error>
                     <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
-                        Please enter a valid 10-digit phone number
+                        {{ 'CONTACT_FORM.ERROR.PHONE_INVALID' | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>Email</mat-label>
+                    <mat-label>{{ 'CONTACT_FORM.EMAIL' | translate }}</mat-label>
                     <input matInput formControlName="email" type="email" />
                     <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
-                        Email is required
+                        {{ 'CONTACT_FORM.ERROR.EMAIL_REQUIRED' | translate }}
                     </mat-error>
                     <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
-                        Please enter a valid email address
+                        {{ 'CONTACT_FORM.ERROR.EMAIL_INVALID' | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>Venue / Location</mat-label>
+                    <mat-label>{{ 'CONTACT_FORM.LOCATION' | translate }}</mat-label>
                     <input matInput formControlName="location" />
                     <mat-error *ngIf="contactForm.get('location')?.hasError('required')">
-                        Venue / Location is required
+                        {{ 'CONTACT_FORM.ERROR.LOCATION_REQUIRED' | translate }}
                     </mat-error>
                 </mat-form-field>
             </div>
+
             <div class="form-row">
                 <mat-form-field>
-                    <mat-label>What do you have in mind</mat-label>
+                    <mat-label>{{ 'CONTACT_FORM.MESSAGE' | translate }}</mat-label>
                     <textarea matInput formControlName="message" rows="2"></textarea>
                     <mat-hint align="end">{{ contactForm.get('message')?.value?.length || 0 }}/500</mat-hint>
                     <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
-                        Please enter a message
+                        {{ 'CONTACT_FORM.ERROR.MESSAGE_REQUIRED' | translate }}
                     </mat-error>
                 </mat-form-field>
             </div>
+
             <div class="form-row">
                 <div class="full-width">
-                    <label style="margin-left: 10px;">Are you interested?*</label>
+                    <label style="margin-left: 10px;">{{ 'CONTACT_FORM.INTERESTED' | translate }}</label>
                     <div formGroupName="preShoot" class="checkbox-group">
                         <ng-container *ngFor="let event of olpEventsLists">
                             <mat-checkbox *ngIf="event?.value" [formControlName]="event.value">
-                                {{ event.EventName }}
+                                {{ ('EVENTS.' + event.EventName) | translate:undefined:event.EventName }}
                             </mat-checkbox>
                         </ng-container>
                     </div>
                 </div>
 
-
                 <div class="full-width">
-                    <label style="margin-left: 10px;">How did you know about us?*</label>
+                    <label style="margin-left: 10px;">{{ 'CONTACT_FORM.SOURCE' | translate }}</label>
                     <div class="radio-group-wrapper">
                         <mat-radio-group formControlName="source" class="responsive-radio-group">
-                            <mat-radio-button value="Instagram">Instagram</mat-radio-button>
-                            <mat-radio-button value="Facebook">Facebook</mat-radio-button>
-                            <mat-radio-button value="Others">Others</mat-radio-button>
+                            <mat-radio-button value="Instagram"> {{ 'CONTACT_FORM.SOURCE_INSTAGRAM' | translate
+                                }}</mat-radio-button>
+                            <mat-radio-button value="Facebook">{{ 'CONTACT_FORM.SOURCE_FACEBOOK' | translate
+                                }}</mat-radio-button>
+                            <mat-radio-button value="Others">{{ 'CONTACT_FORM.SOURCE_OTHERS' | translate
+                                }}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
-
-
             </div>
+
             <div class="camera-wrapper" *ngIf="contactForm.valid">
                 <div id="camera" (click)="onSubmit()">
                     <div class="strip"></div>
@@ -97,6 +105,8 @@
         </form>
     </div>
 </div>
+
+<!-- Submitted message -->
 <div class="camera-flash" *ngIf="submitted">
     <div class="container">
 
@@ -145,29 +155,14 @@
         <div class="confetti"></div>
 
     </div>
+
     <div class="message-body">
         <div class="loader">
-            <span>O</span>
-            <span>L</span>
-            <span>P</span>
+            <span>O</span><span>L</span><span>P</span>
         </div>
         <div class="container">
-            <div>
-                <h1 class="type">Thank you for choosing us!</h1>
-                <h1>We will get back to you as early as possible.</h1>
-            </div>
+            <h1 class="type">{{ 'CONTACT_FORM.THANK_YOU_TITLE' | translate }}</h1>
+            <h1>{{ 'CONTACT_FORM.THANK_YOU_SUB' | translate }}</h1>
         </div>
-        <ul>
-            <li><a href="https://www.instagram.com/onelookphotography_/" target="_blank"><i
-                        class="fab fa-linkedin-in"></i></a></li>
-            <li><a href="https://www.facebook.com/OneLookPhotography.in/photos_by/" target="_blank"><i
-                        class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://www.instagram.com/onelookphotography_/" target="_blank"><i
-                        class="fab fa-instagram"></i></a></li>
-            <li><a href="https://www.instagram.com/onelookphotography_/" target="_blank"><i
-                        class="fab fa-whatsapp"></i></a></li>
-            <li><a href="http://www.youtube.com/@onelookphotographyarun3972" target="_blank"><i
-                        class="fab fa-youtube"></i></a></li>
-        </ul>
     </div>
 </div>

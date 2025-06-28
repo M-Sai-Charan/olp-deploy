@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OlpService } from '../olp-services/olp.service';
-import { HttpParams } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-olp-form',
   standalone: false,
@@ -13,8 +13,17 @@ import { HttpParams } from '@angular/common/http';
 export class OlpFormComponent implements OnInit {
   contactForm: FormGroup;
   submitted = false;
-  olpEventsLists: any = []
-  constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router) {
+  olpEventsLists: any = [];
+  selectedLang = 'en';
+  langs = [
+  { label: '🇬🇧 English', value: 'en' },
+  { label: '🇮🇳 తెలుగు', value: 'te' },
+  ];
+  constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router, public translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    this.selectedLang = 'en';
+    this.translate.use(this.selectedLang);
+
     this.contactForm = this.fb.group({
       firstName: ['', [Validators.required, this.brideGroomValidator]],
       lastName: [''],
@@ -38,6 +47,10 @@ export class OlpFormComponent implements OnInit {
   ngOnInit(): void {
     this.getOLPMasterData();
   }
+  switchLang(lang: string) {
+  this.translate.use(lang);
+  this.selectedLang = lang;
+}
   get events() {
     return this.contactForm.get('events') as FormArray;
   }
