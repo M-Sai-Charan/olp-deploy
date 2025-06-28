@@ -1,0 +1,46 @@
+{
+  "CONTACT_FORM": {
+    "BRIDE_GROOM": "Bride👸🏻 & Groom🤴🏻",
+    "PHONE": "Your contact number",
+    "EMAIL": "Email",
+    "LOCATION": "Venue / Location",
+    "MESSAGE": "What do you have in mind",
+    "SOURCE": "How did you know about us?",
+    "INTERESTED": "Are you interested?",
+    "SUBTITLE": "Thank you for trusting us. Please provide us a couple of details to understand your requirements better.",
+    "THANK_YOU_TITLE": "Thank you for choosing us!",
+    "THANK_YOU_SUB": "We will get back to you as early as possible.",
+    "ERROR": {
+      "BRIDE_GROOM_REQUIRED": "Bride & Groom Name is required",
+      "BRIDE_GROOM_FORMAT": "Please enter in the format: Bride Name & Groom Name",
+      "PHONE_REQUIRED": "Phone Number is required",
+      "PHONE_INVALID": "Please enter a valid 10-digit phone number",
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Please enter a valid email address",
+      "LOCATION_REQUIRED": "Venue / Location is required",
+      "MESSAGE_REQUIRED": "Please enter a message"
+    },
+    "SOURCE_INSTAGRAM": "Instagram",
+    "SOURCE_FACEBOOK": "Facebook",
+    "SOURCE_OTHERS": "Others"
+  },
+  "OLP_EVENTS": {
+    "ENGAGEMENT": "Engagement",
+    "WEDDING": "Wedding",
+    "RECEPTION": "Reception",
+    "HALDI": "Haldi",
+    "PRE_WEDDING": "Pre-Wedding"
+  },
+  "EVENTS": {
+    "Muhurtham": "Muhurtham",
+    "Engagement": "Engagement",
+    "Pre-wedding shoot": "Pre-wedding shoot",
+    "Bride Mangalsnanam": "Bride Mangalsnanam",
+    "Groom Mangalsnanam": "Groom Mangalsnanam",
+    "Bride Nalugu": "Bride Nalugu",
+    "Groom Nalugu": "Groom Nalugu",
+    "Mehandi": "Mehandi",
+    "Sangeeth": "Sangeeth",
+    "Reception": "Reception"
+  }
+}
