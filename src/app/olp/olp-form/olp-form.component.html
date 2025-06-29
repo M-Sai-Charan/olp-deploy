@@ -7,7 +7,7 @@
             </mat-slide-toggle>
         </div>
         <h1>
-            <img style="width: 60px;height: 60px;" src="./assets/images/olp-logo.png" alt="Logo" />
+            <img style="width: 60px;height: 60px;" src="./assets/images/olp-logo.png" alt="Logo" loading="lazy" />
         </h1>
         <p class="subtitle">{{ 'CONTACT_FORM.SUBTITLE' | translate }}</p>
 
@@ -71,7 +71,7 @@
                 <div class="full-width">
                     <label style="margin-left: 10px;">{{ 'CONTACT_FORM.INTERESTED' | translate }}</label>
                     <div formGroupName="preShoot" class="checkbox-group">
-                        <ng-container *ngFor="let event of olpEventsLists">
+                        <ng-container *ngFor="let event of olpEventsLists; trackBy: trackByEvent">
                             <mat-checkbox *ngIf="event?.value" [formControlName]="event.value">
                                 {{ ('EVENTS.' + event.EventName) | translate:undefined:event.EventName }}
                             </mat-checkbox>
@@ -109,51 +109,7 @@
 <!-- Submitted message -->
 <div class="camera-flash" *ngIf="submitted">
     <div class="container">
-
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-
+        <div class="confetti" *ngFor="let c of confettiArray"></div>
     </div>
 
     <div class="message-body">
@@ -166,3 +122,4 @@
         </div>
     </div>
 </div>
+<audio id="clickSound" preload="auto" src="assets/sounds/click.wav"></audio>

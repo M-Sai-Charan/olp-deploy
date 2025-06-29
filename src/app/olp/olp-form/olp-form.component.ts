@@ -13,11 +13,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class OlpFormComponent implements OnInit {
   contactForm: FormGroup;
   submitted = false;
+  confettiArray = Array(30);
   olpEventsLists: any = [];
   selectedLang = 'en';
   langs = [
-  { label: '🇬🇧 English', value: 'en' },
-  { label: '🇮🇳 తెలుగు', value: 'te' },
+    { label: '🇬🇧 English', value: 'en' },
+    { label: '🇮🇳 తెలుగు', value: 'te' },
   ];
   constructor(private olpService: OlpService, private fb: FormBuilder, private router: Router, public translate: TranslateService) {
     this.translate.setDefaultLang('en');
@@ -48,9 +49,9 @@ export class OlpFormComponent implements OnInit {
     this.getOLPMasterData();
   }
   switchLang(lang: string) {
-  this.translate.use(lang);
-  this.selectedLang = lang;
-}
+    this.translate.use(lang);
+    this.selectedLang = lang;
+  }
   get events() {
     return this.contactForm.get('events') as FormArray;
   }
@@ -84,8 +85,7 @@ export class OlpFormComponent implements OnInit {
       this.olpService.postOLP(url, {}).subscribe((data: any) => {
         if (data) {
           setTimeout(() => {
-            const audio = new Audio('assets/sounds/click.wav');
-            audio.play();
+            (document.getElementById('clickSound') as HTMLAudioElement)?.play();
             this.submitted = true;
           }, 300);
         }
@@ -126,5 +126,7 @@ export class OlpFormComponent implements OnInit {
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-
+  trackByEvent(index: number, item: any) {
+    return item.EventID;
+  }
 }
