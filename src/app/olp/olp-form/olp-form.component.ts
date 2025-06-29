@@ -85,7 +85,6 @@ export class OlpFormComponent implements OnInit {
       this.olpService.postOLP(url, {}).subscribe((data: any) => {
         if (data) {
           setTimeout(() => {
-            (document.getElementById('clickSound') as HTMLAudioElement)?.play();
             this.submitted = true;
           }, 300);
         }
