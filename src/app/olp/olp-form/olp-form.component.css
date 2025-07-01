@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;500&display=swap');
 
 body,
 input,
@@ -27,7 +27,7 @@ label {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} */
+}
 
 :root {
   --color1: #55476a;
@@ -879,4 +879,14 @@ li:hover .fab {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 6px 10px;
   margin-top: 10px;
+}
+
+.skeleton-checkbox {
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+  margin-left: 10px;
 }

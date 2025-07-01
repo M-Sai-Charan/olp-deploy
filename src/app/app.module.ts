@@ -28,6 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     ButtonModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
+    MatProgressSpinnerModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

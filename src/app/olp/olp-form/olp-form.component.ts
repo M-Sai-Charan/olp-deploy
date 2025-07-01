@@ -14,6 +14,8 @@ export class OlpFormComponent implements OnInit {
   contactForm: FormGroup;
   submitted = false;
   confettiArray = Array(30);
+  isLoadingEvents = true;
+  skeletonArray = Array(3);
   olpEventsLists: any = [];
   selectedLang = 'en';
   langs = [
@@ -56,6 +58,8 @@ export class OlpFormComponent implements OnInit {
     return this.contactForm.get('events') as FormArray;
   }
   getOLPMasterData() {
+    this.isLoadingEvents = true;
+
     this.olpService.getOLP('https://onelookphotography.azurewebsites.net/api/olp/getmasterdata')
       .subscribe((data: any) => {
         if (data && Array.isArray(data.EventMaster)) {
@@ -66,6 +70,7 @@ export class OlpFormComponent implements OnInit {
               EventID: event.EventID,
               value: event.EventName.toLowerCase().replace(/\s+/g, '_')
             }));
+
           const preShootGroup: { [key: string]: FormControl } = {};
           this.olpEventsLists.forEach((event: any) => {
             preShootGroup[event.value] = new FormControl(false);
@@ -73,6 +78,11 @@ export class OlpFormComponent implements OnInit {
 
           this.contactForm.setControl('preShoot', this.fb.group(preShootGroup));
         }
+
+        this.isLoadingEvents = false;
+      }, error => {
+        console.error(error);
+        this.isLoadingEvents = false;
       });
   }
   onSubmit() {

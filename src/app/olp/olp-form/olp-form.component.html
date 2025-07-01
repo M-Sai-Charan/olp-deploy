@@ -71,12 +71,25 @@
                 <div class="full-width">
                     <label style="margin-left: 10px;">{{ 'CONTACT_FORM.INTERESTED' | translate }}</label>
                     <div formGroupName="preShoot" class="checkbox-group">
-                        <ng-container *ngFor="let event of olpEventsLists; trackBy: trackByEvent">
-                            <mat-checkbox *ngIf="event?.value" [formControlName]="event.value">
-                                {{ ('EVENTS.' + event.EventName) | translate:undefined:event.EventName }}
-                            </mat-checkbox>
+                        <ng-container *ngIf="!isLoadingEvents; else skeletonLoader">
+                            <ng-container *ngFor="let event of olpEventsLists; trackBy: trackByEvent">
+                                <mat-checkbox *ngIf="event?.value" [formControlName]="event.value">
+                                    {{ ('EVENTS.' + event.EventName) | translate:undefined:event.EventName }}
+                                </mat-checkbox>
+                            </ng-container>
                         </ng-container>
+
+                        <!-- Skeleton Loader Template -->
+                        <ng-template #skeletonLoader>
+                            <div *ngFor="let i of skeletonArray" class="skeleton-checkbox">
+                                <mat-checkbox disabled>
+                                    <mat-progress-spinner mode="indeterminate" diameter="20" strokeWidth="3"
+                                        color="accent" class="spinner"></mat-progress-spinner>
+                                </mat-checkbox>
+                            </div>
+                        </ng-template>
                     </div>
+
                 </div>
 
                 <div class="full-width">
@@ -109,7 +122,7 @@
 <!-- Submitted message -->
 <div class="camera-flash" *ngIf="submitted">
     <div class="container">
-        <div class="confetti" ></div>
+        <div class="confetti" *ngFor="let c of confettiArray; index as i"></div>
     </div>
 
     <div class="message-body">
