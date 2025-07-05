@@ -20,9 +20,10 @@
       "LOCATION_REQUIRED": "వేదిక / ప్రదేశం అవసరం",
       "MESSAGE_REQUIRED": "దయచేసి సందేశాన్ని ఇవ్వండి"
     },
-    "SOURCE_INSTAGRAM": "ఇన్‌స్టాగ్రామ్",
-    "SOURCE_FACEBOOK": "ఫేస్‌బుక్",
-    "SOURCE_OTHERS": "ఇతరులు"
+    "SOURCE_REFERRAL": "రెఫరల్",
+    "SOURCE_SOCIALMEDIA": "సోషల్ మీడియా",
+    "SOURCE_OTHERS": "ఇతరులు",
+     "SUBMIT_NOTE": "సబ్మిట్ చేస్తే ప్రతి క్షణాన్ని అందించండి"
   },
   "OLP_EVENTS": {
     "ENGAGEMENT": "నిశ్చితార్థం",

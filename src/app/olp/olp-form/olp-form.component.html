@@ -96,9 +96,9 @@
                     <label style="margin-left: 10px;">{{ 'CONTACT_FORM.SOURCE' | translate }}</label>
                     <div class="radio-group-wrapper">
                         <mat-radio-group formControlName="source" class="responsive-radio-group">
-                            <mat-radio-button value="Instagram"> {{ 'CONTACT_FORM.SOURCE_INSTAGRAM' | translate
+                            <mat-radio-button value="Referral"> {{ 'CONTACT_FORM.SOURCE_REFERRAL' | translate
                                 }}</mat-radio-button>
-                            <mat-radio-button value="Facebook">{{ 'CONTACT_FORM.SOURCE_FACEBOOK' | translate
+                            <mat-radio-button value="SocialMedia">{{ 'CONTACT_FORM.SOURCE_SOCIALMEDIA' | translate
                                 }}</mat-radio-button>
                             <mat-radio-button value="Others">{{ 'CONTACT_FORM.SOURCE_OTHERS' | translate
                                 }}</mat-radio-button>
@@ -114,6 +114,9 @@
                     <div class="led"></div>
                     <div class="btn"><span class="button-click">OLP</span></div>
                 </div>
+            </div>
+            <div class="submit-caption" *ngIf="contactForm.valid">
+                {{ 'CONTACT_FORM.SUBMIT_NOTE' | translate }}
             </div>
         </form>
     </div>
