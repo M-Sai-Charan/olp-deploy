@@ -20,9 +20,10 @@
       "LOCATION_REQUIRED": "Venue / Location is required",
       "MESSAGE_REQUIRED": "Please enter a message"
     },
-    "SOURCE_INSTAGRAM": "Instagram",
-    "SOURCE_FACEBOOK": "Facebook",
-    "SOURCE_OTHERS": "Others"
+    "SOURCE_REFERRAL": "Referral",
+    "SOURCE_SOCIALMEDIA": "Social Media",
+    "SOURCE_OTHERS": "Others",
+     "SUBMIT_NOTE": "By submitting, capture every moment"
   },
   "OLP_EVENTS": {
     "ENGAGEMENT": "Engagement",
