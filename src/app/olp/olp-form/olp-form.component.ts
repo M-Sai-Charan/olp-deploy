@@ -88,7 +88,7 @@ export class OlpFormComponent implements OnInit {
   onSubmit() {
     if (this.contactForm.valid) {
       const jsonObj = this.convertJson(this.contactForm.value);
-      const jsonStr = encodeURIComponent(JSON.stringify(jsonObj));  // Safely encode the JSON
+      const jsonStr = encodeURIComponent(JSON.stringify(jsonObj));
 
       const url = `https://onelookphotography.azurewebsites.net/api/OLP/SetEnquiryDetails?value=${jsonStr}`;
 
